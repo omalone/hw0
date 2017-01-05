@@ -4,19 +4,89 @@ package uchidb;
 /**
  * @author aelmore
  */
-public class HW0Runner {
 
-	//TODO you likely will need to add member variable
-	
-	// This class is a factory for a singleton containers class.
-	// https://www.tutorialspoint.com/java/java_using_singleton.htm
-	public static Containers<Integer, String> getContainers() {
-		// TODO fix this function
-		return null;
+public class Imp implements Containers<T,S> {
+	Map<S,T> localMap = new Map<S,T>;
+
+
+	//Create a set that stores the array of T objects
+	public Set<T> initSet(T[] tArray) {
+		Set<T> set = new Set<T>();
+		for (int i = 0; i<tArray.length; i++) {
+		    set.add(tArray[i]);
+	}
+		return set;
 	}
 
+	//Create a list that stores the array of T objects
+	public List<T> initList(T[] tArray) {
+		List<T> list = new List<T>();
+		for (int i = 0; i<tArray.length; ) {
+			list.add(tArray[i]);
+		}
+
+		return list;
+	}
+
+	//Create an empty map that will use type S as keys, and T as values
+	public Map<S,T> initEmptyMap() {
+		Map<S,T> map = new Map<S,T>;
+		return map;
+	}
+
+	//Store the map in a local field variable -- often called a setter
+	public void storeMap(Map<S,T> mapToStoreInClass) {
+		this.localMap = mapToStoreInClass;
+	}
+
+	//add a key value to store map with a boolean indicating whether to overwrite existing value
+	//returns, was the key value added to the map?
+	public boolean addToMap(S key, T value, boolean overwriteExistingKey) {
+		//add the key, value if overwrite is true, or if the key doesn't exist yet.
+		boolean added;
+		if (overwriteExistingKey || !this.localMap.containsKey(key)) {
+			this.localMap.put(key, value);
+			added = true;
+		} else {
+			added=false;
+		}
+		return added;
+	}
+
+	//get a value based on a key
+	public T getValueFromMap(S key) {
+		T value = this.localMap.get(key);
+		return value;
+	}
+
+	//an overloaded function to get value from map but with a default value
+	//if the key is not present
+	public T getValueFromMap(S key, T defaultValue) {
+		T value = this.localMap.getOrDefault(key,defaultValue);
+	}
+
+}
+
+public class HW0Runner {
+	// This class is a factory for a singleton containers class.
+	// https://www.tutorialspoint.com/java/java_using_singleton.htm
+
+	//TODO you likely will need to add member variable
+		//Added member variable containers
+	private static Containers<T,S> containers = new Container<T,S>();
+
+	//private constructor enforces singleton-ness
+	private Container<T,S>() {}
+
+
+
+	public static Containers<Integer, String> getContainers() {
+		// TODO fix this function
+			//I think I fixed it
+		return containers;
+	}
 
 	public static void main(String[] args){
-		
+		Containers<T,S> cont = Containers.getContainers();
 	}
 }

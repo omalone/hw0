@@ -20,7 +20,7 @@ public interface Containers<T, S> {
 	//Create a set that stores the array of T objects
 	public Set<T> initSet(T[] tArray);
 	
-	//Create a list that stores an the array of T objects
+	//Create a list that stores the array of T objects
 	public List<T> initList(T[] tArray);
 	
 	//Create an empty map that will use type S as keys, and T as values
