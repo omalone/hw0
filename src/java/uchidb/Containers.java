@@ -1,7 +1,7 @@
 /**
  * 
  */
-package uchidb;
+package java.uchidb;
 
 import java.util.List;
 import java.util.Map;

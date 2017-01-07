@@ -1,26 +1,28 @@
-package uchidb;
+package java.uchidb;
+
+import java.util.*;
 
 
 /**
  * @author aelmore
  */
 
-public class Imp implements Containers<T,S> {
-	Map<S,T> localMap = new Map<S,T>;
+class Imp<T,S> implements Containers<T,S> {
+	Map<S,T> localMap = new HashMap<S,T>();
 
 
 	//Create a set that stores the array of T objects
 	public Set<T> initSet(T[] tArray) {
-		Set<T> set = new Set<T>();
-		for (int i = 0; i<tArray.length; i++) {
-		    set.add(tArray[i]);
-	}
+		Set<T> set = new HashSet<T>();
+		for (T aTArray : tArray) {
+			set.add(aTArray);
+		}
 		return set;
 	}
 
 	//Create a list that stores the array of T objects
 	public List<T> initList(T[] tArray) {
-		List<T> list = new List<T>();
+		List<T> list = new ArrayList<T>();
 		for (int i = 0; i<tArray.length; ) {
 			list.add(tArray[i]);
 		}
@@ -30,8 +32,7 @@ public class Imp implements Containers<T,S> {
 
 	//Create an empty map that will use type S as keys, and T as values
 	public Map<S,T> initEmptyMap() {
-		Map<S,T> map = new Map<S,T>;
-		return map;
+		return new HashMap<S,T>();
 	}
 
 	//Store the map in a local field variable -- often called a setter
@@ -55,38 +56,34 @@ public class Imp implements Containers<T,S> {
 
 	//get a value based on a key
 	public T getValueFromMap(S key) {
-		T value = this.localMap.get(key);
-		return value;
+		return this.localMap.get(key);
 	}
 
 	//an overloaded function to get value from map but with a default value
 	//if the key is not present
 	public T getValueFromMap(S key, T defaultValue) {
-		T value = this.localMap.getOrDefault(key,defaultValue);
+		return this.localMap.getOrDefault(key,defaultValue);
 	}
 
 }
 
-public class HW0Runner {
+public class HW0Runner extends Imp{
 	// This class is a factory for a singleton containers class.
 	// https://www.tutorialspoint.com/java/java_using_singleton.htm
 
 	//TODO you likely will need to add member variable
 		//Added member variable containers
-	private static Containers<T,S> containers = new Container<T,S>();
+	private static HW0Runner containers = null;
 
-	//private constructor enforces singleton-ness
-	private Container<T,S>() {}
-
-
+	private HW0Runner() {}
 
 	public static Containers<Integer, String> getContainers() {
 		// TODO fix this function
-			//I think I fixed it
+
 		return containers;
 	}
 
 	public static void main(String[] args){
-		Containers<T,S> cont = Containers.getContainers();
+		Containers<Integer,String> cont = getContainers();
 	}
 }
