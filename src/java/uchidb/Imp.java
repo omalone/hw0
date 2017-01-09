@@ -1,4 +1,4 @@
-package java.uchidb;
+package uchidb;
 
 import java.util.*;
 
@@ -11,11 +11,12 @@ public class Imp<T,S> implements Containers<T,S> {
     Map<S,T> localMap = new HashMap<S,T>();
 
 
+
     //Create a set that stores the array of T objects
     public Set<T> initSet(T[] tArray) {
         Set<T> set = new HashSet<T>();
-        for (T aTArray : tArray) {
-            set.add(aTArray);
+        for (T atArray : tArray) {
+            set.add(atArray);
         }
         return set;
     }
@@ -23,7 +24,7 @@ public class Imp<T,S> implements Containers<T,S> {
     //Create a list that stores the array of T objects
     public List<T> initList(T[] tArray) {
         List<T> list = new ArrayList<T>();
-        for (int i = 0; i<tArray.length; ) {
+        for (int i = 0; i<tArray.length; i++) {
             list.add(tArray[i]);
         }
 
@@ -37,7 +38,7 @@ public class Imp<T,S> implements Containers<T,S> {
 
     //Store the map in a local field variable -- often called a setter
     public void storeMap(Map<S,T> mapToStoreInClass) {
-        this.localMap = mapToStoreInClass;
+        localMap = mapToStoreInClass;
     }
 
     //add a key value to store map with a boolean indicating whether to overwrite existing value
@@ -45,8 +46,8 @@ public class Imp<T,S> implements Containers<T,S> {
     public boolean addToMap(S key, T value, boolean overwriteExistingKey) {
         //add the key, value if overwrite is true, or if the key doesn't exist yet.
         boolean added;
-        if (overwriteExistingKey || !this.localMap.containsKey(key)) {
-            this.localMap.put(key, value);
+        if (overwriteExistingKey || !localMap.containsKey(key)) {
+            localMap.put(key, value);
             added = true;
         } else {
             added=false;
@@ -56,13 +57,13 @@ public class Imp<T,S> implements Containers<T,S> {
 
     //get a value based on a key
     public T getValueFromMap(S key) {
-        return this.localMap.get(key);
+        return localMap.get(key);
     }
 
     //an overloaded function to get value from map but with a default value
     //if the key is not present
     public T getValueFromMap(S key, T defaultValue) {
-        return this.localMap.getOrDefault(key,defaultValue);
+        return localMap.getOrDefault(key,defaultValue);
     }
 
 }
